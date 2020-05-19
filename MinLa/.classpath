@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/guill/Desktop/james-core-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/guill/Desktop/Tec/Cuarto Semestre/Análisis y diseño de algoritmos/Parcial 3/MinLA-Problem/james-core-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
