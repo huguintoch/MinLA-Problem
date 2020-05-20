@@ -1,4 +1,4 @@
-# minla-mip
+# MinLA Problem
 
 Implementation with Gurobi of the latest MIP model for the Minimum Linear Arrangement (MinLA) presented in the [article](https://www.sciencedirect.com/science/article/abs/pii/S1571065317302500) :
 
