@@ -69,14 +69,39 @@ def search(cities, edges, max_iterations, max_no_improv)
 end
 
 if __FILE__ == $0
-  # problem configuration
-  vertices = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-  edges = [[7,8],[7,3],[8,12],[8,9],[3,1],[3,4],[12,14],[12,13],[9,11],[9,10],[1,2],[1,0],[4,6],[4,5]]
+  if ARGV.length > 1
+    numVertices = Intger(ARGV[0])
+    edgesString = ARGV[1]
+    edgesArray = edgesString.split(" ")
+  else
+    input = ARGF.read
+    splitedInput = input.split("\n")
+    numVertices = Integer(splitedInput[0])
+    edgesString = splitedInput[1]
+    edgesArray = edgesString.split(" ")
+  end
 
-  # algorithm configuration
-  max_iterations = 100
-  max_no_improv = 50
-  # execute the algorithm
-  best = search(vertices, edges, max_iterations, max_no_improv)
-  puts "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
+  #problem configuration
+  vertices = []
+  for i in 0..numVertices-1 do 
+    vertices.push(i+1)
+  end 
+
+  if edgesArray.length%2 == 0 
+    edges = [[]]
+    for i in 0..(edgesArray.length-1)/2 do
+      edges.push([Integer(edgesArray[i*2])-1], [Integer(edgesArray[i*2+1])-1])
+    end
+
+    puts edges
+
+    # # algorithm configuration
+    # max_iterations = 1000
+    # max_no_improv = 50
+    # # execute the algorithm
+    # best = search(vertices, edges, max_iterations, max_no_improv)
+    # puts "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
+  else
+    puts "Se recibió una arista incompleta"
+  end
  end
