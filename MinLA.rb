@@ -1,13 +1,13 @@
-def cost(permutation, cities, edges)
-  distance=0
+def cost(permutation, vertices, edges)
+  distance = 0
   edges.each_with_index do |val, i|
-    distance += (cities[permutation[val[0]]] - cities[permutation[val[1]]]).abs
+    distance += (vertices[permutation[val[0]]] - vertices[permutation[val[1]]]).abs
   end
   return distance
 end
 
-def random_permutation(cities)
-  perm = Array.new(cities.size){|i| i}
+def random_permutation(vertices)
+  perm = Array.new(vertices.size){|i| i}
   perm.each_index do |i|
     r = rand(perm.size-i) + i
     perm[r], perm[i] = perm[i], perm[r]
@@ -27,11 +27,11 @@ def stochastic_two_opt(permutation)
   return perm
 end
 
-def local_search(best, cities, edges, max_no_improv)
+def local_search(best, vertices, edges, max_no_improv)
   count = 0
   begin
     candidate = {:vector=>stochastic_two_opt(best[:vector])}
-    candidate[:cost] = cost(candidate[:vector], cities, edges)
+    candidate[:cost] = cost(candidate[:vector], vertices, edges)
     count = (candidate[:cost] < best[:cost]) ? 0 : count+1
     best = candidate if candidate[:cost] < best[:cost]
   end until count >= max_no_improv
@@ -47,23 +47,23 @@ def double_bridge_move(perm)
   return p1 + p2
 end
 
-def perturbation(cities, edges, best)
+def perturbation(vertices, edges, best)
   candidate = {}
   candidate[:vector] = double_bridge_move(best[:vector])
-  candidate[:cost] = cost(candidate[:vector], cities, edges)
+  candidate[:cost] = cost(candidate[:vector], vertices, edges)
   return candidate
 end
 
-def search(cities, edges, max_iterations, max_no_improv)
+def search(vertices, edges, max_iterations, max_no_improv)
   best = {}
-  best[:vector] = random_permutation(cities)
-  best[:cost] = cost(best[:vector], cities, edges)
-  best = local_search(best, cities, edges, max_no_improv)
+  best[:vector] = random_permutation(vertices)
+  best[:cost] = cost(best[:vector], vertices, edges)
+  best = local_search(best, vertices, edges, max_no_improv)
   max_iterations.times do |iter|
-    candidate = perturbation(cities, edges, best)
-    candidate = local_search(candidate, cities, edges, max_no_improv)
+    candidate = perturbation(vertices, edges, best)
+    candidate = local_search(candidate, vertices, edges, max_no_improv)
     best = candidate if candidate[:cost] < best[:cost]
-    puts " > iteration #{(iter+1)}, best=#{best[:cost]}"
+    #puts " > iteration #{(iter+1)}, best=#{best[:cost]}"
   end
   return best
 end
@@ -95,12 +95,12 @@ if __FILE__ == $0
 
     puts edges
 
-    # # algorithm configuration
-    # max_iterations = 1000
-    # max_no_improv = 50
-    # # execute the algorithm
-    # best = search(vertices, edges, max_iterations, max_no_improv)
-    # puts "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
+    # algorithm configuration
+    max_iterations = 1000
+    max_no_improv = 50
+    # execute the algorithm
+    best = search(vertices, edges, max_iterations, max_no_improv)
+    puts "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
   else
     puts "Se recibió una arista incompleta"
   end
