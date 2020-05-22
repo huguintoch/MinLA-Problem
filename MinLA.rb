@@ -69,10 +69,10 @@ def search(vertices, edges, max_iterations, max_no_improv)
 end
 
 if __FILE__ == $0
+  valid = true
   if ARGV.length > 1
-    numVertices = Intger(ARGV[0])
-    edgesString = ARGV[1]
-    edgesArray = edgesString.split(" ")
+    numVertices = Integer(ARGV.shift)
+    edgesArray = ARGV
   else
     input = ARGF.read
     splitedInput = input.split("\n")
@@ -81,20 +81,20 @@ if __FILE__ == $0
     edgesArray = edgesString.split(" ")
   end
 
-  #problem configuration
   vertices = []
   for i in 0..numVertices-1 do 
     vertices.push(i+1)
   end 
 
   if edgesArray.length%2 == 0 
-    edges = [[]]
+    edges = []
     for i in 0..(edgesArray.length-1)/2 do
-      edges.push([Integer(edgesArray[i*2])-1], [Integer(edgesArray[i*2+1])-1])
+      element1 = Integer(edgesArray[i*2])-1
+      element2 = Integer(edgesArray[i*2+1])-1
+      a = element1, element2
+      edges.push(a)
     end
-
-    puts edges
-
+    
     # algorithm configuration
     max_iterations = 1000
     max_no_improv = 50
