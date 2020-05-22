@@ -94,13 +94,20 @@ if __FILE__ == $0
       a = element1, element2
       edges.push(a)
     end
-    
+
     # algorithm configuration
-    max_iterations = 1000
+    max_iterations = 100000
     max_no_improv = 50
     # execute the algorithm
+    start = Time.now
     best = search(vertices, edges, max_iterations, max_no_improv)
-    puts "Done. Best Solution: c=#{best[:cost]}, v=#{best[:vector].inspect}"
+    finish = Time.now
+    for i in 0..best[:vector].length-1 do 
+      print "#{best[:vector][i]} "
+    end
+    puts "\n"
+    puts "#{best[:cost]}"
+    puts "#{finish-start}"
   else
     puts "Se recibió una arista incompleta"
   end
