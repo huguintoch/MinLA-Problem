@@ -96,7 +96,7 @@ if __FILE__ == $0
     end
 
     # algorithm configuration
-    max_iterations = 1000
+    max_iterations = 10000
     max_no_improv = 50
     # execute the algorithm
     start = Time.now
@@ -112,3 +112,13 @@ if __FILE__ == $0
     puts "Se recibió una arista incompleta"
   end
  end
+
+# *** AUTORES ***
+# Emilio Castillo Alegría A01631303
+# Hugo Isaac Valdez Ruvalcaba A01631301
+# Guillermo Hiroshi Tanamachi Ortega A01631327
+# José Adrián Lozano Domínguez A01631017
+
+# *** REFERENCIAS ***
+# Código basado en:
+# http://www.cleveralgorithms.com/nature-inspired/stochastic/iterated_local_search.html

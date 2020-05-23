@@ -31,3 +31,10 @@ Emilio Castillo Alegría A01631303
 Hugo Isaac Valdez Ruvalcaba A01631301
 Guillermo Hiroshi Tanamachi Ortega A01631327
 José Adrián Lozano Domínguez A01631017
+
+---------------------------------------------------------------------------------------------------------------
+
+*** REFERENCIAS ***
+
+Código basado en:
+http://www.cleveralgorithms.com/nature-inspired/stochastic/iterated_local_search.html
