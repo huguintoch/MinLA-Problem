@@ -96,8 +96,8 @@ if __FILE__ == $0
     end
 
     # algorithm configuration
-    max_iterations = 100000
-    max_no_improv = 20
+    max_iterations = 1000
+    max_no_improv = 50
     # execute the algorithm
     start = Time.now
     best = search(vertices, edges, max_iterations, max_no_improv)
