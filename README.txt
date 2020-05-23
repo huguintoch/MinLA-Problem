@@ -20,6 +20,7 @@ Por lo tanto, para ejecutar el programa desde consola, solo es necesario:
 	a) ruby Minla.rb < test01.txt
 	b) ruby Minla.rb < test01.txt > resultados.txt
 	c) ruby Minla.rb 15 7 8 7 3 8 12 8 9 3 1 3 4 12 14 12 13 9 11 9 10 1 2 1 0 4 6 4 5
+	d) ruby Minla.rb 15 7 8 7 3 8 12 8 9 3 1 3 4 12 14 12 13 9 11 9 10 1 2 1 0 4 6 4 5 > resultados.txt
 3.- Verificar el resultado en consola o en el archivo de salida
 
 ---------------------------------------------------------------------------------------------------------------
