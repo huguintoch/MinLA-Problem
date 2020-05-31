@@ -1,4 +1,5 @@
 if __FILE__ == $0
+   
    n = Integer(ARGV[1])
    if ARGV[0] == "path"
       puts n
