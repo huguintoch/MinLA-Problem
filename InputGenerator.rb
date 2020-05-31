@@ -8,6 +8,9 @@ if __FILE__ == $0
    elsif ARGV[0] == "cycle"
       print(n)
    elsif ARGV[0] == "star"
-      print(n)
+      puts n
+      for i in 2..n do
+         print "1 #{i} "
+      end
    end
 end
