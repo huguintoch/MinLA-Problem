@@ -6,7 +6,11 @@ if __FILE__ == $0
          print "#{i} #{i+1} "
       end
    elsif ARGV[0] == "cycle"
-      print(n)
+      puts(n)
+      for i in 0..n-1 do 
+         print "#{(i)%n+1} "
+         print "#{(i+1)%n+1} "
+      end
    elsif ARGV[0] == "star"
       print(n)
    end
