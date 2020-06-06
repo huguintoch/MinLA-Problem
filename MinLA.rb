@@ -51,7 +51,7 @@ def local_search_first_improv(best, vertices, edges, max_no_improv)
     if candidate[:cost] < best[:cost]
       best = candidate
     end
-  end until candidate[:cost] <= best[:cost]
+  end until count >= max_no_improv
   return best
 end 
 
@@ -75,7 +75,7 @@ def search(vertices, edges, max_iterations, max_no_improv)
   best = {}
   best[:vector] = random_permutation(vertices)
   best[:cost] = cost(best[:vector], vertices, edges)
-  best = local_search_first_improv(best, vertices, edges, max_no_improv)
+  best = local_search(best, vertices, edges, max_no_improv)
   max_iterations.times do |iter|
     candidate = perturbation(vertices, edges, best)
     candidate = local_search(candidate, vertices, edges, max_no_improv)
@@ -114,7 +114,7 @@ if __FILE__ == $0
 
     # algorithm configuration
     max_iterations = 100000
-    max_no_improv = 10
+    max_no_improv = 1000
     # execute the algorithm
     start = Time.now
     best = search(vertices, edges, max_iterations, max_no_improv)
