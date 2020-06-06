@@ -92,10 +92,18 @@ end
 
 if __FILE__ == $0
   valid = true
-  if ARGV.length > 1
+  if ARGV.length > 2
+    # algorithm configuration
+    max_iterations = Integer(ARGV.shift)
+    max_no_improv = Integer(ARGV.shift)
+    # read graph
     numVertices = Integer(ARGV.shift)
     edgesArray = ARGV
   else
+    # algorithm configuration
+    max_iterations = Integer(ARGV.shift)
+    max_no_improv = Integer(ARGV.shift)
+    # read file
     input = ARGF.read
     splitedInput = input.split("\n")
     numVertices = Integer(splitedInput[0])
@@ -117,9 +125,6 @@ if __FILE__ == $0
       edges.push(a)
     end
 
-    # algorithm configuration
-    max_iterations = 100
-    max_no_improv = 1000
     # execute the algorithm
     start = Time.now
     best = search(vertices, edges, max_iterations, max_no_improv)
