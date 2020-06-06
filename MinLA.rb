@@ -18,12 +18,17 @@ end
 def stochastic_two_opt(permutation)
   perm = Array.new(permutation)
   c1, c2 = rand(perm.size), rand(perm.size)
-  exclude = [c1]
-  exclude << ((c1==0) ? perm.size-1 : c1-1)
-  exclude << ((c1==perm.size-1) ? 0 : c1+1)
-  c2 = rand(perm.size) while exclude.include?(c2)
-  c1, c2 = c2, c1 if c2 < c1
-  perm[c1...c2] = perm[c1...c2].reverse
+  temp = perm[c1]
+  perm[c1] = perm[c2]
+  perm[c2] = temp
+  #c1, c2 = rand(perm.size), rand(perm.size)
+  
+  #exclude = [c1]
+  #exclude << ((c1==0) ? perm.size-1 : c1-1)
+  #exclude << ((c1==perm.size-1) ? 0 : c1+1)
+  #c2 = rand(perm.size) while exclude.include?(c2)
+  #c1, c2 = c2, c1 if c2 < c1
+  #perm[c1...c2] = perm[c1...c2].reverse
   return perm
 end
 
@@ -63,7 +68,7 @@ def search(vertices, edges, max_iterations, max_no_improv)
     candidate = perturbation(vertices, edges, best)
     candidate = local_search(candidate, vertices, edges, max_no_improv)
     best = candidate if candidate[:cost] < best[:cost]
-    #puts " > iteration #{(iter+1)}, best=#{best[:cost]}"
+    puts " > iteration #{(iter+1)}, best=#{best[:cost]}"
   end
   return best
 end
@@ -96,8 +101,8 @@ if __FILE__ == $0
     end
 
     # algorithm configuration
-    max_iterations = 10000
-    max_no_improv = 25
+    max_iterations = 1000
+    max_no_improv = 10
     # execute the algorithm
     start = Time.now
     best = search(vertices, edges, max_iterations, max_no_improv)
