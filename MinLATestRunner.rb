@@ -133,7 +133,7 @@ if __FILE__ == $0
     max_no_improv = 1000
     # execute the algorithm
     puts "Respuesta correcta: #{correct_result}"
-    puts "Itercion, Resultado, Tiempo, Error"
+    puts "Iteracion, Resultado, Tiempo, Error"
     resSum = 0
     timeSum = 0
     errorSum = 0
@@ -154,13 +154,13 @@ if __FILE__ == $0
       puts "#{i+1},#{best[:cost]},#{finish-start},#{error}"
     end
     puts ""
-    puts "Mejor Resultado #{results.min}"
+    puts "Mejor Resultado: #{results.min}"
     res_promedio = resSum/50
-    puts "Resultado Promedio #{resSum/50.0}"
-    puts "Desviacion Estandar #{sigma(results, res_promedio)}"
+    puts "Resultado Promedio: #{resSum/50.0}"
+    puts "Desviacion Estandar: #{sigma(results, res_promedio)}"
     puts ""
-    puts "Tiempo Promedio #{timeSum/50.0}"
-    puts "Error Promedio #{errorSum/50.0}"
+    puts "Tiempo Promedio: #{timeSum/50.0}"
+    puts "Error Promedio: #{errorSum/50.0}"
   else
     puts "Se recibió una arista incompleta"
   end
