@@ -17,18 +17,17 @@ end
 
 def stochastic_two_opt(permutation)
   perm = Array.new(permutation)
+  # c1, c2 = rand(perm.size), rand(perm.size)
+  # temp = perm[c1]
+  # perm[c1] = perm[c2]
+  # perm[c2] = temp
   c1, c2 = rand(perm.size), rand(perm.size)
-  temp = perm[c1]
-  perm[c1] = perm[c2]
-  perm[c2] = temp
-  #c1, c2 = rand(perm.size), rand(perm.size)
-  
-  #exclude = [c1]
-  #exclude << ((c1==0) ? perm.size-1 : c1-1)
-  #exclude << ((c1==perm.size-1) ? 0 : c1+1)
-  #c2 = rand(perm.size) while exclude.include?(c2)
-  #c1, c2 = c2, c1 if c2 < c1
-  #perm[c1...c2] = perm[c1...c2].reverse
+  exclude = [c1]
+  exclude << ((c1==0) ? perm.size-1 : c1-1)
+  exclude << ((c1==perm.size-1) ? 0 : c1+1)
+  c2 = rand(perm.size) while exclude.include?(c2)
+  c1, c2 = c2, c1 if c2 < c1
+  perm[c1...c2] = perm[c1...c2].reverse
   return perm
 end
 
@@ -42,6 +41,19 @@ def local_search(best, vertices, edges, max_no_improv)
   end until count >= max_no_improv
   return best
 end
+
+def local_search_first_improv(best, vertices, edges, max_no_improv)
+  count = 0
+  begin
+    candidate = {:vector=>stochastic_two_opt(best[:vector])}
+    candidate[:cost] = cost(candidate[:vector], vertices, edges)
+    count = count+1
+    if candidate[:cost] < best[:cost]
+      best = candidate
+    end
+  end until candidate[:cost] <= best[:cost]
+  return best
+end 
 
 def double_bridge_move(perm)
   pos1 = 1 + rand(perm.size / 4)
@@ -63,7 +75,7 @@ def search(vertices, edges, max_iterations, max_no_improv)
   best = {}
   best[:vector] = random_permutation(vertices)
   best[:cost] = cost(best[:vector], vertices, edges)
-  best = local_search(best, vertices, edges, max_no_improv)
+  best = local_search_first_improv(best, vertices, edges, max_no_improv)
   max_iterations.times do |iter|
     candidate = perturbation(vertices, edges, best)
     candidate = local_search(candidate, vertices, edges, max_no_improv)
@@ -101,7 +113,7 @@ if __FILE__ == $0
     end
 
     # algorithm configuration
-    max_iterations = 1000
+    max_iterations = 100000
     max_no_improv = 10
     # execute the algorithm
     start = Time.now
