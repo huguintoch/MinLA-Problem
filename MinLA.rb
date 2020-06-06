@@ -17,10 +17,6 @@ end
 
 def stochastic_two_opt(permutation)
   perm = Array.new(permutation)
-  # c1, c2 = rand(perm.size), rand(perm.size)
-  # temp = perm[c1]
-  # perm[c1] = perm[c2]
-  # perm[c2] = temp
   c1, c2 = rand(perm.size), rand(perm.size)
   exclude = [c1]
   exclude << ((c1==0) ? perm.size-1 : c1-1)
@@ -28,6 +24,15 @@ def stochastic_two_opt(permutation)
   c2 = rand(perm.size) while exclude.include?(c2)
   c1, c2 = c2, c1 if c2 < c1
   perm[c1...c2] = perm[c1...c2].reverse
+  return perm
+end
+
+def swap(permutation)
+  perm = Array.new(permutation)
+  c1, c2 = rand(perm.size), rand(perm.size)
+  temp = perm[c1]
+  perm[c1] = perm[c2]
+  perm[c2] = temp
   return perm
 end
 
@@ -113,7 +118,7 @@ if __FILE__ == $0
     end
 
     # algorithm configuration
-    max_iterations = 100000
+    max_iterations = 100
     max_no_improv = 1000
     # execute the algorithm
     start = Time.now
