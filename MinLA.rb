@@ -85,7 +85,7 @@ def search(vertices, edges, max_iterations, max_no_improv)
     candidate = perturbation(vertices, edges, best)
     candidate = local_search(candidate, vertices, edges, max_no_improv)
     best = candidate if candidate[:cost] < best[:cost]
-    puts " > iteration #{(iter+1)}, best=#{best[:cost]}"
+    #puts " > iteration #{(iter+1)}, best=#{best[:cost]}"
   end
   return best
 end
