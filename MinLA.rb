@@ -48,15 +48,15 @@ def local_search(best, vertices, edges, max_no_improv)
 end
 
 def local_search_first_improv(best, vertices, edges, max_no_improv)
-  count = 0
+  # count = 0
   begin
     candidate = {:vector=>stochastic_two_opt(best[:vector])}
     candidate[:cost] = cost(candidate[:vector], vertices, edges)
-    count = count+1
+    # count = count+1
     if candidate[:cost] < best[:cost]
       best = candidate
     end
-  end until count >= max_no_improv
+  end until candidate[:cost] < best[:cost]
   return best
 end 
 
